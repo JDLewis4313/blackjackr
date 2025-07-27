@@ -1,81 +1,49 @@
-import functools
-import sqlite3
-from flask import (
-    Blueprint, flash, redirect, render_template,
-    request, session, url_for
-)
-from werkzeug.security import check_password_hash, generate_password_hash
+from flask import Blueprint, request, redirect, url_for, render_template, flash
+from flask_login import login_user, logout_user
+from domains.player.models import Player
 from infrastructure.database.db import db
 
-auth_bp = Blueprint('auth', __name__, url_prefix='/auth')
+auth_bp = Blueprint('player_auth', __name__, url_prefix='/auth')
 
-
-@auth_bp.route('/register', methods=('GET', 'POST'))
+@auth_bp.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
-        username = request.form['username']
+        name     = request.form['name']
+        email    = request.form['email']
         password = request.form['password']
-        error = None
 
-        if not username:
-            error = 'Username is required.'
-        elif not password:
-            error = 'Password is required.'
+        existing = Player.query.filter_by(email=email).first()
+        if existing:
+            flash("Email already registered.", "error")
+            return redirect(url_for('player_auth.login'))
 
-        if error is None:
-            try:
-                db.session.execute(
-                    "INSERT INTO user (username, password) VALUES (:username, :password)",
-                    {"username": username, "password": generate_password_hash(password)}
-                )
-                db.session.commit()
-            except sqlite3.IntegrityError:
-                error = f"User {username} is already registered."
-            else:
-                return redirect(url_for('auth.login'))
+        player = Player(name=name, email=email, password=password)
+        db.session.add(player)
+        db.session.commit()
+        login_user(player)
+        return redirect(url_for('core.index'))
 
-        flash(error)
-
+    # notice the subpath:
     return render_template('player/auth/register.html')
 
 
-@auth_bp.route('/login', methods=('GET', 'POST'))
+@auth_bp.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        username = request.form['username']
+        email    = request.form['email']
         password = request.form['password']
-        error = None
 
-        user = db.session.execute(
-            "SELECT * FROM user WHERE username = :username",
-            {"username": username}
-        ).fetchone()
-
-        if user is None:
-            error = 'Incorrect username.'
-        elif not check_password_hash(user['password'], password):
-            error = 'Incorrect password.'
-
-        if error is None:
-            session.clear()
-            session['user_id'] = user['id']
+        player = Player.query.filter_by(email=email).first()
+        if player and player.password == password:
+            login_user(player)
             return redirect(url_for('core.index'))
 
-        flash(error)
+        flash("Invalid credentials.", "error")
 
     return render_template('player/auth/login.html')
 
 
 @auth_bp.route('/logout')
 def logout():
-    session.clear()
-    return redirect(url_for('core.index'))
-
-
-def login_required(view):
-    @functools.wraps(view)
-    def wrapped_view(**kwargs):
-        if not session.get('user_id'):
-            return redirect(url_for('auth.login'))
-        return view(**kwargs)
-    return wrapped_view
+    logout_user()
+    return redirect(url_for('player_auth.login'))

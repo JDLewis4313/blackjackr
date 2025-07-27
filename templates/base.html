@@ -1,24 +1,26 @@
-<!doctype html>
-<title>{% block title %}{% endblock %} -Black Jack</title>
-<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-<nav>
-  <h1>Lets Play Black Jack</h1>
-  <ul>
-    {% if g.user %}
-      <li><span>{{ g.user['username'] }}</span>
-      <li><a href="{{ url_for('auth.logout') }}">Log Out</a>
-    {% else %}
-      <li><a href="{{ url_for('auth.register') }}">Register</a>
-      <li><a href="{{ url_for('auth.login') }}">Log In</a>
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Blackjack</title>
+</head>
+<body>
+  <nav>
+    <a href="{{ url_for('core.index') }}">Home</a> |
+    <a href="{{ url_for('player_auth.login') }}">Log In</a> |
+    <a href="{{ url_for('player_auth.register') }}">Register</a> |
+    <a href="{{ url_for('player_auth.logout') }}">Log Out</a>
+  </nav>
+  <hr>
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      {% for category, msg in messages %}
+        <div class="flash {{ category }}">{{ msg }}</div>
+      {% endfor %}
     {% endif %}
-  </ul>
-</nav>
-<section class="content">
-  <header>
-    {% block header %}{% endblock %}
-  </header>
-  {% for message in get_flashed_messages() %}
-    <div class="flash">{{ message }}</div>
-  {% endfor %}
-  {% block content %}{% endblock %}
-</section>
+  {% endwith %}
+  <div>
+    {% block content %}{% endblock %}
+  </div>
+</body>
+</html>

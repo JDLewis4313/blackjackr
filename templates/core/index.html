@@ -1,8 +1,10 @@
 {% extends 'base.html' %}
-z
-{% block header %}
-  <h1>{% block title %}Log In{% endblock %}</h1>
+
+{% block content %}
+  <h2>Welcome {{ user.name if user.is_authenticated else 'Guest' }}</h2>
+  {% if user.is_authenticated %}
+    <p><a href="{{ url_for('game.play') }}">Play Blackjack</a></p>
+  {% else %}
+    <p>Please log in or register to play.</p>
+  {% endif %}
 {% endblock %}
-
-
-  {% block content %}<h1>Welcome to Black Jack</h1>{% endblock %}

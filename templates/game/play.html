@@ -1,0 +1,16 @@
+<h2>Welcome, {{ current_user.name }}!</h2>
+<p>Your balance: ${{ current_user.balance }}</p>
+
+<h3>Your Hand: {{ state.player_hand }} (Score: {{ state.player_score }})</h3>
+<h3>Dealer Hand: {{ state.dealer_hand }} (Score: {{ state.dealer_score }})</h3>
+
+{% if state.game_over %}
+    <h2>Result: {{ state.result }}</h2>
+{% else %}
+    <form method="post" action="/game/hit">
+        <button type="submit">Hit</button>
+    </form>
+    <form method="post" action="/game/stand">
+        <button type="submit">Stand</button>
+    </form>
+{% endif %}
