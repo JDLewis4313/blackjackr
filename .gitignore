@@ -1,0 +1,17 @@
+# Virtualenv
+.venv/
+
+# Bytecode
+__pycache__/
+*.pyc
+
+# Local instance database
+instance/
+*.sqlite
+
+# Build artifacts
+dist/
+
+# Coverage reports
+htmlcov/
+.coverage
