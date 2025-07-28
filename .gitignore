@@ -1,17 +1,58 @@
-# Virtualenv
-.venv/
-
-# Bytecode
+# Python artifacts
 __pycache__/
 *.pyc
+*.pyo
+*.pyd
+*.log
 
-# Local instance database
-instance/
-*.sqlite
-
-# Build artifacts
-dist/
-
-# Coverage reports
-htmlcov/
+# Test cache
 .coverage
+.cache/
+htmlcov/
+.tox/
+nosetests.xml
+coverage.xml
+*.cover
+*.pytest_cache/
+
+# OS & editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Env & secrets
+.env
+.env.*
+*.sqlite3
+instance/app.db
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+env/
+
+# Flask + Alembic
+migrations/versions/*.pyc
+migrations/__pycache__/
+migrations/*.db
+migrations/versions/*.pyc
+migrations/versions/__pycache__/
+
+# Package management
+pip-wheel-metadata/
+*.egg-info/
+dist/
+build/
+
+# Deployment artifacts 
+*.bak
+*.old
+*.tmp
+*.tar.gz
+
+# Documentation builds
+docs/_build/

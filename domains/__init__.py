@@ -3,7 +3,7 @@ from config.settings import Config
 from infrastructure.database.db import db, migrate
 from flask_login import LoginManager
 from domains.player.models import Player
-from domains.player.auth import auth_bp
+from domains.player.routes import auth_bp
 from domains.core.routes import core_bp
 from domains.game.routes import game_bp
 
