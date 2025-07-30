@@ -1,5 +1,4 @@
 import random
-import copy
 
 from flask import Blueprint, render_template, session, jsonify
 from flask_login import login_required
@@ -9,20 +8,16 @@ game_bp = Blueprint('game', __name__, url_prefix='/game')
 
 def get_game():
     state = session.get('game')
-    if state:
-        game = BlackjackGame()
-        game.__dict__ = copy.deepcopy(state)  # restore game state safely
-        return game
-    return BlackjackGame()
-
+    return BlackjackGame.from_dict(state) if state else BlackjackGame()
 
 def save_game(game):
-    session['game'] = copy.deepcopy(game.__dict__)
+    session['game'] = game.to_dict()
+
 
 
 @game_bp.route('/play')
 @login_required
-def play_blackjack():
+def play():
     game = get_game()
     save_game(game)
     state = game.get_game_state()
@@ -94,7 +89,28 @@ class BlackjackGame:
         self.dealer_hand = self.deck.deal(2)
         self.game_over = False  # ends the game
         self.result = None      # should store the result, hopefully for db implementation
+    # must serialize the deck
+        
+    def to_dict(self):
+        return {
+            "deck": self.deck.cards,  # raw list of strings
+            "player_hand": self.player_hand,
+            "dealer_hand": self.dealer_hand,
+            "game_over": self.game_over,
+            "result": self.result
+        }
 
+    @staticmethod
+    def from_dict(state):
+        game = BlackjackGame.__new__(BlackjackGame)  # bypass __init__
+        game.deck = Deck()
+        game.deck.cards = state["deck"]
+        game.player_hand = state["player_hand"]
+        game.dealer_hand = state["dealer_hand"]
+        game.game_over = state["game_over"]
+        game.result = state["result"]
+        return game
+        
     def player_hit(self):
         # Player wants another card
         if not self.game_over:

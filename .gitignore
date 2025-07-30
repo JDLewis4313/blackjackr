@@ -57,3 +57,6 @@ build/
 # Documentation builds
 docs/_build/
 .env
+.venv/
+__pycache__/
+*.sqlite3
