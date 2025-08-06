@@ -8,8 +8,8 @@ from infrastructure.database.db import db
 def new_user_data():
     return {
         'name': 'Raviroyashe',
-        'email': 'raviroyashe@gmail.com',
-        'password': 'password@123'
+        'email': 'raviro.mahere@gmail.com',
+        'password': 'Mahere123'
     }
 
 
