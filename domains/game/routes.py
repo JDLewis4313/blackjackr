@@ -5,7 +5,7 @@ from flask_login import login_required
 
 game_bp = Blueprint('game', __name__, url_prefix='/game')
 
-
+# Needed to create session
 def get_game():
     state = session.get('game')
     return BlackjackGame.from_dict(state) if state else BlackjackGame()
@@ -89,8 +89,8 @@ class BlackjackGame:
         self.dealer_hand = self.deck.deal(2)
         self.game_over = False  # ends the game
         self.result = None      # should store the result, hopefully for db implementation
-    # must serialize the deck
-        
+
+    # must serialize the deck JL    
     def to_dict(self):
         return {
             "deck": self.deck.cards,  # raw list of strings

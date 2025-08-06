@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blackjackr - Home</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Background Cards -->
+    <div class="background-cards">
+        <img src="Cards/ace_of_spades.svg" alt="Ace of Spades">
+        <img src="Cards/king_of_hearts.svg" alt="King of Hearts">
+        <img src="Cards/queen_of_clubs.svg" alt="Queen of Clubs">
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo">♠ Blackjackr ♠</div>
+        <div class="nav-buttons">
+            <button class="nav-btn" id="login-btn">Login</button>
+            <button class="nav-btn" id="signup-btn">Sign Up</button>
+            <button class="nav-btn" onclick="location.href='highscores.html'">High Scores</button>
+            <button class="nav-btn" id="howtoplay-btn">How to Play</button>
+        </div>
+    </nav>
+
+    <!-- Game Area -->
+   
+
+    <section class="game-area">
+        <h2>Shuffling the Deck...</h2>
+        <div class="shuffle-container stacked">
+            <div class="card"><img src="Cards/ace_of_hearts.svg" alt="Ace of Hearts"></div>
+            <div class="card"><img src="Cards/king_of_spades2.svg" alt="King of Spades"></div>
+            <div class="card"><img src="Cards/queen_of_diamonds.svg" alt="Queen of Diamonds"></div>
+            <div class="card"><img src="Cards/jack_of_clubs.svg" alt="Jack of Clubs"></div>
+        </div>
+        <button class="start-btn" onclick="location.href='game.html'">Play the Game</button>
+    </section>
+
+    <!-- Game Menu -->
+    <section class="menu-area">
+        <h3>Welcome to Blackjackr!</h3>
+        <p>Play the classic game of 21. Sign in to save your score and climb the leaderboard!</p>
+        
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Blackjackr | All Rights Reserved</p>
+    </footer>
+
+    <!-- Modals -->
+    <div class="modal" id="login-modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2>Login</h2>
+            <input type="text" placeholder="Username">
+            <input type="password" placeholder="Password">
+            <button>Login</button>
+        </div>
+    </div>
+
+    <div class="modal" id="signup-modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2>Create Account</h2>
+            <input type="text" placeholder="Username">
+            <input type="email" placeholder="Email">
+            <input type="password" placeholder="Password">
+            <button>Sign Up</button>
+        </div>
+    </div>
+
+    <div class="modal" id="howtoplay-modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2>How to Play Blackjack</h2>
+            <p>
+                - The goal is to reach 21 without going over.<br>
+                - Face cards are worth 10.<br>
+                - Aces are 1 or 11.<br>
+                - Each player starts with 2 cards.<br>
+                - Hit to draw another card, Stand to keep your total.<br>
+                - Dealer must draw until reaching 17.<br>
+                - Closest to 21 wins!
+            </p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
