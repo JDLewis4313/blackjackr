@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>Log In</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <style>
+    .auth { max-width: 380px; margin: 60px auto; background:#1c2541; padding:20px; border-radius:12px; color:#fff; }
+    .auth input { width:100%; padding:10px; margin:8px 0; border-radius:8px; border:1px solid #3a506b; background:#0b132b; color:#fff; }
+    .auth button { width:100%; padding:10px; border:0; border-radius:8px; background:#5bc0be; color:#102a43; font-weight:700; cursor:pointer; }
+    .flash { margin:8px 0; color:#f99; }
+    a { color:#9ad; }
+  </style>
+</head>
+<body>
+  <div class="auth">
+    <h2>Log In</h2>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% for cat,msg in messages %}<div class="flash">{{ msg }}</div>{% endfor %}
+    {% endwith %}
+    <form method="post">
+      <label>Username</label>
+      <input name="username" required />
+      <label>Password</label>
+      <input type="password" name="password" required />
+      <button type="submit">Log In</button>
+    </form>
+    <p>No account? <a href="{{ url_for('register') }}">Register</a></p>
+  </div>
+</body>
+</html>
