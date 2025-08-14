@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>All 52 Cards</h2>
+<div class="cards all">
+  {% for c in deck %}
+    <div class="card">{{ c }}</div>
+  {% endfor %}
+</div>
+{% endblock %}

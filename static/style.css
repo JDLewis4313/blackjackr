@@ -1,0 +1,22 @@
+body { font-family: system-ui, Arial, sans-serif; margin: 0; background:#0b1a27; color:#eef3f6; }
+.nav { display:flex; gap:1rem; padding:0.75rem 1rem; background:#0a1420; align-items:center; }
+.nav a { color:#cde1ff; text-decoration:none; }
+.nav .user { margin-left:auto; opacity:0.8; }
+.container { padding: 1rem; }
+.flash { list-style:none; padding:0.5rem 1rem; background:#16314a; border-left:4px solid #4da3ff; }
+h1,h2,h3 { margin-top:0.5rem; }
+.btn { display:inline-block; background:#2e8bff; color:white; padding:0.5rem 0.9rem; border-radius:8px; text-decoration:none; border:0; cursor:pointer; }
+.btn:hover { filter:brightness(1.1); }
+
+.table { display:grid; gap:1.5rem; }
+.hand .cards { display:flex; gap:0.5rem; flex-wrap:wrap; }
+.card { width:60px; height:84px; border-radius:8px; background:white; color:black; display:flex; justify-content:center; align-items:center; font-weight:700; }
+.card.back { background:#1c2a3a; color:#1c2a3a; }
+.score { margin-top:0.25rem; font-size:0.9rem; opacity:0.9; }
+
+.cards.all { display:grid; grid-template-columns: repeat(auto-fill, minmax(60px, 1fr)); gap:0.5rem; }
+.tableled { width:100%; border-collapse:collapse; }
+.tableled th, .tableled td { padding:0.5rem; border-bottom:1px solid #26445f; text-align:left; }
+.stats { display:flex; gap:1rem; margin:0.5rem 0 1rem; }
+label { display:block; margin:0.5rem 0; }
+input { padding:0.4rem; border-radius:6px; border:1px solid #335b7e; width:240px; }

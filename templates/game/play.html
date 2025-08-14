@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Table</h2>
+
+<section class="table">
+  <div class="hand">
+    <h3>Dealer</h3>
+    <div class="cards">
+      {% for c in dealer %}
+        {% if loop.index == 2 and not show_dealer_all %}
+          <div class="card back">🂠</div>
+        {% else %}
+          <div class="card">{{ c }}</div>
+        {% endif %}
+      {% endfor %}
+    </div>
+    <div class="score">Score: {{ dealer_score if show_dealer_all else '??' }}</div>
+  </div>
+
+  <div class="hand">
+    <h3>You</h3>
+    <div class="cards">
+      {% for c in player %}<div class="card">{{ c }}</div>{% endfor %}
+    </div>
+    <div class="score">Score: {{ player_score }}</div>
+  </div>
+</section>
+
+{% if not game_over %}
+  <form method="post" action="{{ url_for('hit') }}" style="display:inline">
+    <button class="btn" type="submit">Hit</button>
+  </form>
+  <form method="post" action="{{ url_for('stand') }}" style="display:inline">
+    <button class="btn" type="submit">Stand</button>
+  </form>
+{% else %}
+  <a class="btn" href="{{ url_for('start') }}">Play Again</a>
+{% endif %}
+{% endblock %}

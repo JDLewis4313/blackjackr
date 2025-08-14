@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+  <h1>Blackjack</h1>
+  {% if session.get('user_id') %}
+    <p>Your session stats:</p>
+    <div class="stats">
+      <div>Wins: {{ stats.wins or 0 }}</div>
+      <div>Ties: {{ stats.ties or 0 }}</div>
+      <div>Losses: {{ stats.losses or 0 }}</div>
+    </div>
+    <a class="btn" href="{{ url_for('start') }}">Start Game</a>
+  {% else %}
+    <p>Please register or log in to play.</p>
+  {% endif %}
+{% endblock %}

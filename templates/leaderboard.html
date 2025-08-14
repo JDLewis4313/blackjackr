@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Leaderboard</h2>
+<table class="tableled">
+  <thead><tr><th>User</th><th>Wins</th><th>Ties</th><th>Losses</th></tr></thead>
+  <tbody>
+  {% for r in rows %}
+    <tr><td>{{ r.username }}</td><td>{{ r.wins or 0 }}</td><td>{{ r.ties or 0 }}</td><td>{{ r.losses or 0 }}</td></tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

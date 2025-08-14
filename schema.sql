@@ -1,0 +1,19 @@
+DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS games;
+
+CREATE TABLE users (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  username TEXT UNIQUE NOT NULL,
+  password_hash TEXT NOT NULL,
+  created_at TEXT DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE games (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  user_id INTEGER NOT NULL,
+  player_score INTEGER NOT NULL,
+  dealer_score INTEGER NOT NULL,
+  result TEXT NOT NULL,  -- 'W' | 'L' | 'T' //column storesResult
+  created_at TEXT DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (user_id) REFERENCES users(id)
+);
