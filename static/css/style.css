@@ -1,3 +1,4 @@
+[hidden] { display: none !important; }
 body { margin:0; font-family:system-ui, Arial, sans-serif; background:#0b132b; color:#fff; }
 .navbar { display:flex; justify-content:space-between; align-items:center; padding:12px 20px; background:#1c2541; position:sticky; top:0; z-index:10; }
 .logo { font-weight:700; letter-spacing:.5px; }
@@ -6,7 +7,14 @@ body { margin:0; font-family:system-ui, Arial, sans-serif; background:#0b132b; c
 .background-cards { position:fixed; inset:0; pointer-events:none; opacity:.07; display:flex; gap:30px; justify-content:center; align-items:center; flex-wrap:wrap; }
 .game-table { max-width:900px; margin:40px auto; background:#1c2541; padding:20px; border-radius:14px; box-shadow:0 10px 40px rgba(0,0,0,.3); }
 section { margin:18px 0; }
-.card-container { display:flex; gap:10px; min-height:120px; align-items:center; }
+.card-container { 
+display:flex;
+justify-content: center; 
+gap:10px; 
+}
+.dealer-area, .player-area {
+text-align: center;
+}
 .card-container img { height:120px; }
 .controls { display:flex; gap:10px; justify-content:center; margin-top:18px; }
 .controls button { padding:10px 16px; border:0; border-radius:10px; background:#5bc0be; color:#102a43; font-weight:700; cursor:pointer; }
@@ -15,3 +23,64 @@ footer { text-align:center; margin:30px 0 10px; opacity:.7; }
 .modal { position:fixed; inset:0; background:rgba(0,0,0,.6); display:grid; place-items:center; }
 .modal-content { background:#1c2541; border-radius:12px; padding:20px; max-width:520px; box-shadow:0 10px 40px rgba(0,0,0,.5); }
 .close-btn { float:right; background:#3a506b; color:white; border:0; border-radius:8px; padding:6px 10px; cursor:pointer; }
+
+body {
+    background-image: url('../bjtable.jpg');
+    background-size: cover;      /* cover the whole screen */
+    background-position: center; /* Centered */
+    background-repeat: no-repeat;
+}
+
+
+body {
+  background: #0b132b url("/static/img/table.jpg") center center / cover no-repeat fixed;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.navbar, .game-table, .modal, footer {
+  position: relative;
+  z-index: 1;
+}
+
+
+.game-table {
+  background: transparent;
+  backdrop-filter: saturate(120%) blur(0.5px);
+}
+
+#blackjack-table {
+  min-height: 100vh;
+  background: url("/static/bjtable.jpg") center / cover no-repeat fixed;
+  position: relative;
+}
+
+#blackjack-table::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.10); 
+  pointer-events: none;
+  z-index: 0;
+}
+
+#blackjack-table .navbar,
+#blackjack-table .game-table,
+#blackjack-table .modal,
+#blackjack-table footer {
+  position: relative;
+  z-index: 1;
+}
+
+.background-cards { 
+  opacity: 0.05; /* very subtle over the table */
+  pointer-events: none;
+}
+

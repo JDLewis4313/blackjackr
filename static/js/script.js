@@ -19,10 +19,30 @@ document.getElementById("restart-btn").addEventListener("click", startGame);
 document.getElementById("howtoplay-btn").addEventListener("click", ()=> modal(true));
 document.getElementById("close-modal").addEventListener("click", ()=> modal(false));
 
-function modal(show){
+function modal(show) {
   const m = document.getElementById("howtoplay-modal");
-  if (show) m.removeAttribute("hidden"); else m.setAttribute("hidden","hidden");
+  if (!m) return;
+  if (show) m.removeAttribute("hidden");
+  else m.setAttribute("hidden", "hidden");
 }
+
+document.addEventListener("click", (e) => {
+  if (e.target.closest("#howtoplay-btn")) {
+    modal(true);
+  }
+  if (e.target.closest("#close-modal, .close-btn")) {
+    modal(false);
+  }
+
+  const backdrop = document.getElementById("howtoplay-modal");
+  if (backdrop && e.target === backdrop) {
+    modal(false);
+  }
+});
+
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") modal(false);
+});
 
 function buildDeck(){
   const d = [];

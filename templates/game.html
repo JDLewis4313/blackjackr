@@ -5,68 +5,65 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Blackjackr - Game</title>
 
-  <!-- CSS -->
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
-  <!-- Background Cards -->
-  <div class="background-cards">
-    <img src="{{ url_for('static', filename='cards/ace_of_spades.svg') }}" alt="Ace of Spades">
-    <img src="{{ url_for('static', filename='cards/king_of_hearts.svg') }}" alt="King of Hearts">
-    <img src="{{ url_for('static', filename='cards/queen_of_clubs.svg') }}" alt="Queen of Clubs">
-  </div>
 
-  <!-- Navbar -->
-  <nav class="navbar">
-    <div class="logo">♠ Blackjackr ♠</div>
-    <div class="nav-buttons">
-      <button class="nav-btn" onclick="location.href='/'">Home</button>
-      <button class="nav-btn" onclick="alert('High scores coming soon!')">High Scores</button>
-      <button class="nav-btn" id="howtoplay-btn">How to Play</button>
+  <div id="blackjack-table">
+
+    <nav class="navbar">
+      <div class="logo">♠ Blackjackr ♠</div>
+      <div class="nav-buttons">
+        <button class="nav-btn" onclick="location.href='/'">Home</button>
+        <button class="nav-btn" onclick="alert('High scores coming soon!')">High Scores</button>
+        <button class="nav-btn" id="howtoplay-btn">How to Play</button>
+      </div>
+    </nav>
+
+    <main class="game-table">
+      <section class="dealer-area">
+        <h2>Dealer</h2>
+        <div class="card-container" id="dealer-cards"></div>
+        <p class="score" id="dealer-score">Score: 0</p>
+      </section>
+
+      <section class="player-area">
+        <h2>You</h2>
+        <div class="card-container" id="player-cards"></div>
+        <p class="score" id="player-score">Score: 0</p>
+      </section>
+
+      <!-- Game Controls -->
+
+      <section class="controls">
+        <button id="hit-btn">Hit</button>
+        <button id="stand-btn">Stand</button>
+        <button id="restart-btn">Restart</button>
+      </section>
+    </main>
+
+    <!-- Footer -->
+
+    <footer>
+      <p>FREE PALESTINE FROM THE RIVER TO THE SEA</p>
+    </footer>
+
+    <!-- Modal -->
+
+    <div class="modal" id="howtoplay-modal" hidden>
+      <div class="modal-content">
+        <button class="close-btn" id="close-modal">×</button>
+        <h2>How to Play Blackjack</h2>
+        <p>
+          - Reach 21 without going over.<br>
+          - Face cards = 10. Aces = 1 or 11.<br>
+          - Hit = draw; Stand = hold; Dealer hits to 17+.
+        </p>
+      </div>
     </div>
-  </nav>
 
-  <!-- Game Table -->
-  <main class="game-table">
-    <section class="dealer-area">
-      <h2>Dealer</h2>
-      <div class="card-container" id="dealer-cards"></div>
-      <p class="score" id="dealer-score">Score: 0</p>
-    </section>
+  </div> <!-- /#blackjack-table -->
 
-    <section class="player-area">
-      <h2>You</h2>
-      <div class="card-container" id="player-cards"></div>
-      <p class="score" id="player-score">Score: 0</p>
-    </section>
-
-    <!-- Game Controls -->
-    <section class="controls">
-      <button id="hit-btn">Hit</button>
-      <button id="stand-btn">Stand</button>
-      <button id="restart-btn">Restart</button>
-    </section>
-  </main>
-
-  <!-- Footer -->
-  <footer>
-    <p>&copy; 2025 Blackjackr | All Rights Reserved</p>
-  </footer>
-
-  <!-- Modal -->
-  <div class="modal" id="howtoplay-modal" hidden>
-    <div class="modal-content">
-      <button class="close-btn" id="close-modal">×</button>
-      <h2>How to Play Blackjack</h2>
-      <p>
-        - Reach 21 without going over.<br>
-        - Face cards = 10. Aces = 1 or 11.<br>
-        - Hit = draw; Stand = hold; Dealer hits to 17+.
-      </p>
-    </div>
-  </div>
-
-  <!-- JS -->
   <script src="{{ url_for('static', filename='js/script.js') }}" defer></script>
 </body>
 </html>
